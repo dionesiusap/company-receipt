@@ -1,0 +1,7 @@
+#hiderow, .button, .button-small, .delete {
+  display: none;
+}
+
+#bank, #courier, #textarea-courier {
+  border: none;
+}

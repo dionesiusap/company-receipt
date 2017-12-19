@@ -1,0 +1,18 @@
+#shippingcard {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#card{
+	border: 5px solid #189A02;
+	width:375px;
+	height: 220px;
+	margin: 10px;
+}
+
+#image1 {
+	max-width: 150px;	
+}
+
+#customer-title1 { font-size: 18px; font-weight: bold; float: right; width: 250px; height: 25px; text-align:left; margin-top:-10px;}
+#customer-address1 { float: right; width: 250px; height: 125px; text-align:left; }

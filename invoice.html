@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	
+	<title>Invoice</title>
+	
+	<link rel='stylesheet' type='text/css' href='css/style.css' />
+	<link rel='stylesheet' type='text/css' href='css/card.css' />
+	<link rel='stylesheet' type='text/css' href='css/print.css' media="print" />
+
+	<script type='text/javascript' src='js/jquery-1.3.2.min.js'></script>
+	<script type='text/javascript' src='js/main.js'></script>
+
+	<script type="text/javascript" language="javascript">
+        function showField(name) {
+            if (name=='other') {
+                document.getElementById('textarea-courier').innerHTML='<input type="text" name="other" />';
+            }
+            else {
+                document.getElementById('textarea-courier').innerHTML='';
+            }
+        }
+
+        function copyName() {
+			var a = document.getElementById('customer-title');
+			var b = document.getElementById('customer-title1');
+			if (a != null) {
+				b.value = a.value;
+			}
+		}
+
+		function copyAddr() {
+			var a = document.getElementById('customer-address');
+			var b = document.getElementById('customer-address1');
+			if (a != null) {
+				b.value = a.value;
+			}
+		}
+
+		function copyCred() {
+			copyName();
+			copyAddr();
+		}
+	</script>
+
+</head>
+
+<body>
+
+	<div id="page-wrap">
+
+		<div id="header">INVOICE</div>
+		
+		<div id="identity">
+		
+            <div id="address"><p>Toko Wening</p>
+0853 2010 5050</div>
+
+            <div id="logo">
+
+              <div id="logohelp">
+                <input id="imageloc" type="text" size="50" value="" /><br />
+                (max width: 540px, max height: 100px)
+              </div>
+              <img id="image" src="images/logo.png" alt="logo" />
+            </div>
+		
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<div id="customer">
+
+            <textarea placeholder="Nama Pelanggan" id="customer-title"></textarea>
+			
+            <table id="meta">
+                <tr>
+                    <td class="meta-head"># Invoice</td>
+                    <td><div id="invnr" style="float:right"></div><textarea style="width:25%"></textarea></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Tanggal</td>
+                    <td><div id="date"></div></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Total Pembayaran</td>
+                    <td><div class="due">Rp 0,-</div></td>
+                </tr>
+				<tr>
+                    <td class="meta-head">Via Bank</td>
+                    <td>
+						<select id="bank">
+                          <option value="choose">Pilih bank</option>
+						  <option value="bca">BCA</option>
+						  <option value="mandiri">Mandiri</option>
+						  <option value="bni">BNI</option>
+						  <option value="bri">BRI</option>
+						</select>
+					</td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Kurir</td>
+                    <td>
+						<select id="courier" onchange="showField(this.options[this.selectedIndex].value)">
+                          <option value="choose">Pilih kurir</option>
+						  <option value="jne">JNE</option>
+						  <option value="j&t">J&amp;T</option>
+						  <option value="pos">POS Indonesia</option>
+                          <option value="other">Lainnya</option>
+						</select>
+                        <div id="textarea-courier"></div>
+					</td>
+                </tr>
+
+            </table>
+			
+			<textarea placeholder="Alamat Pelanggan" id="customer-address"></textarea>
+			
+		
+		</div>
+		
+		<table id="items">
+		
+		  <tr>
+		      <th>Kode</th>
+		      <th>Barang</th>
+		      <th>Jumlah</th>
+		      <th>Harga Satuan</th>
+		      <th>Harga Total</th>
+		  </tr>
+		  
+		  <tr class="item-row">
+		      <td class="item-code"><div class="delete-wpr"><textarea placeholder="ABCD-123-XY"></textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
+		      <td class="item-name"><textarea placeholder="Nama Barang"></textarea></td>
+		      <td style="width:10px"><textarea placeholder="0" class="qty"></textarea></td>
+		      <td>
+			    <table>
+				  <tr>
+				    <td style="padding:0px 5px 0px 0px">Rp </td>
+					<td style="padding:0px 0px 0px 0px"><textarea placeholder="0,-" class="cost"></textarea></td>
+				  </tr>
+				</table>
+			  </td>
+		      <td><span class="price">Rp 0,-</span></td>
+		  </tr>
+		  
+		  <tr class="item-row">
+		      <td class="item-code"><div class="delete-wpr"><textarea placeholder="ABCD-123-XY"></textarea><a class="delete" href="javascript:;" title="Hapus baris">X</a></div></td>
+		      <td class="item-name"><textarea placeholder="Nama Barang"></textarea></td>
+		      <td style="width:10px"><textarea placeholder="0" class="qty"></textarea></td>
+		      <td>
+			    <table>
+				  <tr>
+				    <td style="padding:0px 5px 0px 0px">Rp </td>
+					<td style="padding:0px 0px 0px 0px"><textarea placeholder="0,-" class="cost"></textarea></td>
+				  </tr>
+				</table>
+			  </td>
+		      <td><span class="price">Rp 0,-</span></td>
+		  </tr>
+		  
+		  <tr id="hiderow">
+		    <td colspan="5"><a id="addrow" href="javascript:;" title="Tambah baris">Tambah baris</a></td>
+		  </tr>
+		  
+		  <tr style="border-top: solid 1px;">
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="1" class="total-line">Subtotal</td>
+		      <td class="total-value"><div id="subtotal">Rp 0,-</div></td>
+		  </tr>
+		  
+		  <tr>
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="1" class="total-line">Ongkos Kirim</td>
+		      <td class="total-value">
+			    <table style="border-collapse: collapse">
+				  <tr>
+				    <td style="border:none;outline:none;padding:0px 5px 0px 0px;">Rp </td>
+					<td style="border:none;outline:none;padding:0px 0px 0px 0px;"><textarea placeholder="0,-" id="ongkir"></textarea></td>
+				  </tr>
+				</table>
+			  </td>
+		  </tr>
+		  
+		  <tr>
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="1" class="total-line">Diskon</td>
+		      <td class="total-value"><table style="border-collapse: collapse"><tr><td style="border:none;outline:none;padding:0px 5px 0px 0px;">Rp </td><td style="border:none;outline:none;padding:0px 0px 0px 0px;"><textarea placeholder="0,-" id="discount"></textarea></td></tr></table></td>
+		  </tr>
+		  		  
+		  <tr>
+		      <td colspan="3" class="blank"> </td>
+		      <td colspan="1" class="total-line balance">Total Pembayaran</td>
+		      <td class="total-value balance"><div class="due">Rp 0,-</div></td>
+		  </tr>
+		
+		</table>
+		
+		<div id="terms">
+		  <h5>Terima Kasih</h5>
+		  Terima kasih atas kepercayaan Anda terhadap toko kami. Silakan berbelanja kembali.
+		</div>
+
+	<div style="margin-top:50px;margin-left: 10px"><a href="#copy" onclick="copyCred()"><span id="copy" class="button-small">Salin informasi pelanggan</span></a></div>
+	<div id="card">
+		<table id="shippingcard">
+		  <tr>
+			<td style="border:none;outline:none;padding-bottom:0px">
+			  <img id="image1" src="images/logo.png" alt="logo" style="float:left"/><br></br>
+			  <p style="font-size: 18px; font-weight: bold;">0853 2010 5050</p>
+			</td>
+		  </tr>
+		  <tr>
+		    <td style="border:none;outline:none;">
+			  <textarea placeholder="Nama Pelanggan" id="customer-title1" name="customer-title1"></textarea>
+			  <textarea placeholder="Alamat Pelanggan" id="customer-address1" name="customer-address1"></textarea>
+			</td>
+		  <tr>
+		</table>
+	</div>
+
+		<span>
+		  <a href="javascript:window.print()"><span class="button">Cetak Invoice</span></a>
+		  <a href="./invoice.html"><span class="button">Invoice Baru</span></a>
+		</span>
+	
+	</div>
+	
+</body>
+
+</html>
